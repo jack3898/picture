@@ -19,23 +19,7 @@ Once the picture frame is all configured, it should be a set and forget. But som
 
 ## Change the WiFi:
 
-1. Power off the picture frame.
-2. Unplug the MicroSD card from the mini computer and insert the it into your computer.
-3. In the `/boot` folder, create a `wpa_supplicant.conf` file.
-4. If it exists, edit it or create a new one.
-5. Copy the following code if you need to create a new one:
-
-```conf
-country=gb
-update_config=1
-ctrl_interface=/var/run/wpa_supplicant
-
-network={
- scan_ssid=1
- ssid="Your WiFi name here"
- psk="Your WiFi password here"
-}
-```
+The easiest method is to just plug the device into a screen via HDMI, and use `sudo raspi-config` to change network options.
 
 6. Transfer the MicroSD card back and power on the device.
 7. 🤞
