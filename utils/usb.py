@@ -1,5 +1,6 @@
 import os
 import subprocess
+from pathlib import Path
 
 img_location = os.path.expanduser("~/piusb.img")
 internal_mount_location = os.path.expanduser("~/usb")
@@ -20,8 +21,8 @@ def create_backing_file_if_not_exists():
     if not os.path.exists(img_location):
         print("Creating backing file...")
         run_command(f"sudo dd if=/dev/zero of={img_location} bs=1M count=4096")
-        run_command("sudo mkfs.vfat {img_location}")
-        run_command("sudo chmod 666 {img_location}")
+        run_command(f"sudo mkfs.vfat {img_location}")
+        run_command(f"sudo chmod 666 {img_location}")
     else:
         print("Backing file already exists.")
 
@@ -57,6 +58,11 @@ def disable_usb_storage():
     # Mount locally for Pi access
     run_command(f"sudo mount -o loop {img_location} {internal_mount_location}")
 
+def create_internal_mountpoint():
+    print(f"Checking {internal_mount_location}...")
+    folder_path = Path(internal_mount_location)
+    os.makedirs(folder_path, exist_ok=True)
+
 def toggle_usb_connectivity(usb = False):
 
     print("Checking UDC availability...")
@@ -78,6 +84,7 @@ def toggle_usb_connectivity(usb = False):
         enable_usb_storage()
     else:
         print("Giving Pi read access to USB files...\n")
+        create_internal_mountpoint()
         disable_usb_storage()
 
     print("Success!")
