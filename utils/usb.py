@@ -20,7 +20,7 @@ def check_udc():
 def create_backing_file_if_not_exists():
     if not os.path.exists(img_location):
         print("Creating backing file...")
-        run_command(f"sudo dd if=/dev/zero of={img_location} bs=1M count=16384")
+        run_command(f"sudo dd if=/dev/zero of={img_location} bs=1M count=4000")
         run_command(f"sudo mkfs.vfat {img_location}")
         run_command(f"sudo chmod 666 {img_location}")
     else:
