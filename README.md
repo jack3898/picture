@@ -36,6 +36,7 @@ Ensure you activate the correct virtual environment before running any inky Pyth
 - `cd ~/inky` then execute the `install.sh` file. Follow the steps.
 - Run `sudo raspi-config`
 - Go to `Interface Options` and enable `SPI` and `I2C`
+- `sudo nano /boot/firmware/config.txt` and add `dtoverlay=dwc2`
 
 ### Systemd configuration
 
