@@ -20,7 +20,7 @@ def check_udc():
 def create_backing_file_if_not_exists():
     if not os.path.exists(img_location):
         print("Creating backing file...")
-        run_command(f"sudo dd if=/dev/zero of={img_location} bs=1M count=4096")
+        run_command(f"sudo dd if=/dev/zero of={img_location} bs=1M count=16384")
         run_command(f"sudo mkfs.vfat {img_location}")
         run_command(f"sudo chmod 666 {img_location}")
     else:
@@ -39,7 +39,7 @@ def check_usb_connection():
     print(output)
 
 def unset_storage():
-    run_command(f"sudo umount {internal_mount_location}")
+    run_command(f"sudo umount {internal_mount_location} || true")
     run_command("sudo modprobe -r g_mass_storage")
 
 def enable_usb_storage():
